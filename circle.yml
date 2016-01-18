@@ -7,14 +7,14 @@ test:
     - rake db:sample_data
 
 deployment:
-  acceptance:
-    branch: development
-    commands:
-      - ./bin/deploy.sh elasticsearcher-acceptance:
-          timeout: 360
+  # acceptance:
+  #   branch: development
+  #   commands:
+  #     - ./bin/deploy.sh elasticsearcher-acceptance:
+  #         timeout: 360
 
-  production:
-    branch: master 
-    commands:
-      - ./bin/deploy.sh elasticsearcher:
-          timeout: 360
+  # production:
+  #   branch: master
+  #   commands:
+  #     - ./bin/deploy.sh elasticsearcher:
+  #         timeout: 360
