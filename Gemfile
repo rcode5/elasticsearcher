@@ -19,6 +19,8 @@ gem 'autoprefixer-rails'
 
 gem 'awesome_print'
 
+gem 'elasticsearch-rails'
+
 group :production, :acceptance do
   gem 'rack-timeout'
   gem 'rails_stdout_logging'
@@ -39,6 +41,9 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'jasmine-rails'
+  gem 'dotenv-rails'
+
+  gem 'elasticsearch-extensions', require: nil
 end
 
 group :development do
@@ -54,4 +59,5 @@ group :development do
   gem 'guard-livereload'
   gem 'rb-fsevent'
   gem 'growl'
+  gem 'byebug'
 end

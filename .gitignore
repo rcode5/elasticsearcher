@@ -18,3 +18,8 @@
 
 # Ignore compiled assets.
 /public/assets
+
+# emacs tmp files
+*~
+
+.byebug_history
