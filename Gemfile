@@ -19,7 +19,9 @@ gem 'autoprefixer-rails'
 
 gem 'awesome_print'
 
+gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
+
 
 group :production, :acceptance do
   gem 'rack-timeout'

@@ -1,0 +1,11 @@
+/ expects model_class, query and results
+.container-fluid
+  h2 Searching #{model_class.name} with query &ldquo;#{query}&rdquo;
+  - if results.empty?
+    .alert.alert-warning Nothing to see here
+  .row
+    .col-xs-12
+      ul.search-results
+        - results.each do |result|
+          li.search-result
+            = result

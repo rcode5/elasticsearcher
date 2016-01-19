@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
+  include ES::Controller
+
   def index
     redirect_to root_path
   end

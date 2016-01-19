@@ -1,5 +1,7 @@
 .row
   .col-xs-6
+    = render '/common/search_widget', model: Post
     = render '/posts/index_table', posts: @posts
   .col-xs-6
+    = render '/common/search_widget', model: Author
     = render '/authors/index_table', authors: @authors
