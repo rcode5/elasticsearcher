@@ -8,6 +8,19 @@ and `elasticsearch-rails` gems.
 * Post(:title, :body)
 * Author(:name, :hometown)
 
+## Connecting to Elasticsearch
+
+Elasticsearch's ruby client looks for ELASTICSEARCH_URL to specify where to point queries.
+When we run our test server, the test cluster looks for several other environment variables
+(see [elasticsearch-extensions gem](https://github.com/elastic/elasticsearch-ruby/blob/master/elasticsearch-extensions/lib/elasticsearch/extensions/test/cluster.rb) for details).  In this app, we leverage
+
+    TEST_CLUSTER_PORT  (in spec/support/test_es_server.rb)
+    TEST_CLUSTER_LOGS  (in circle.yml)
+
+Note, that even after setting the TEST_CLUSTER_PORT for the test cluster, this does *NOT* set the proper port for
+the Elasticsearch::Client which is automagically hooked to ActiveRecord::Base models - assuming the highest level
+integration (`include Elasticsearch::Model`).  So don't forget to set ELASTICSEARCH_URL for test to match the
+lTEST_CLUSTER_PORT (whose default is 9250).  Check the `.env` and `.env.test` files included in this project.
 
 Generated with [Raygun](https://github.com/carbonfive/raygun).
 
