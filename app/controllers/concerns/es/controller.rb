@@ -8,7 +8,13 @@ module ES
 
     def search
       es_results = @model_class.search(@query)
-      @search_results = es_results.results.results
+      @search_results = (es_results.try(:results).try(:results) || []).map { |result|
+        SearchResultPresenter.new(result)
+      }
+      respond_to do |fmt|
+        fmt.js { render '/common/search' }
+        fmt.html { }
+      end
     end
 
     private

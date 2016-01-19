@@ -7,6 +7,13 @@
   }
 }
 
+.row [class^=col-] {
+  .form-horizontal .form-group {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
 body {
   &:after {
     content: '';
@@ -20,10 +27,6 @@ body {
     background-position: left top;
     background-size: cover;
     filter: grayscale(80%);
-    -webkit-filter: grayscale(80%);
-    -moz-filter:    grayscale(80%);
-    -ms-filter:     grayscale(80%);
-    -o-filter:      grayscale(80%);
-
+    z-index: -1000;
   }
 }
