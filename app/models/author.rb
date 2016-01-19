@@ -8,5 +8,3 @@ class Author < ActiveRecord::Base
   include Elasticsearch::Model::Callbacks
 
 end
-
-Author.import force: true

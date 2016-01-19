@@ -1,8 +1,8 @@
 .row
-  .col-xs-6
+  .col-xs-6.posts
     = render '/common/search_widget', model: Post
     = render '/posts/index_table', posts: @posts
-  .col-xs-6
+  .col-xs-6.authors
     = render '/common/search_widget', model: Author
     = render '/authors/index_table', authors: @authors
 .row

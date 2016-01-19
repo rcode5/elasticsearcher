@@ -8,5 +8,3 @@ class Post < ActiveRecord::Base
   include Elasticsearch::Model::Callbacks
 
 end
-
-Post.import force: true

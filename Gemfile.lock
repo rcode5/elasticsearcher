@@ -106,6 +106,8 @@ GEM
     factory_girl_rails (4.5.0)
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
+    faker (1.6.1)
+      i18n (~> 0.5)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.10)
@@ -231,6 +233,8 @@ GEM
       rspec-core (~> 3.4.0)
       rspec-expectations (~> 3.4.0)
       rspec-mocks (~> 3.4.0)
+    rspec-collection_matchers (1.1.2)
+      rspec-expectations (>= 2.99.0.beta1)
     rspec-core (3.4.1)
       rspec-support (~> 3.4.0)
     rspec-expectations (3.4.0)
@@ -319,6 +323,7 @@ DEPENDENCIES
   elasticsearch-model
   elasticsearch-rails
   factory_girl_rails
+  faker
   foreman
   fuubar
   growl
@@ -338,6 +343,7 @@ DEPENDENCIES
   rails (~> 4.2.5)
   rails_stdout_logging
   rb-fsevent
+  rspec-collection_matchers
   rspec-rails
   sass-rails
   simple_form

@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :author do
-    name "MyString"
-hometown "MyString"
+    name { Faker::Name.name }
+    hometown { Faker::Address.city }
   end
 
 end

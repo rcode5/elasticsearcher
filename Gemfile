@@ -41,9 +41,11 @@ end
 
 group :test, :development do
   gem 'rspec-rails'
+  gem 'rspec-collection_matchers'
   gem 'factory_girl_rails'
   gem 'jasmine-rails'
   gem 'dotenv-rails'
+  gem 'faker'
 
   gem 'elasticsearch-extensions', require: nil
 end

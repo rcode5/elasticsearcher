@@ -1,8 +1,8 @@
 / expects model as a ruby class
-.search-widget
-  - model_string = model.name.tableize
+- model_string = model.name.tableize
+.search-widget class="search-widget-for-#{model_string}"
   = form_tag "/#{model_string}/search", remote: true, class: 'search-widget-form form-horizontal' do
     .form-group
       = text_field_tag :query, @query, class: 'search-widget-form-query-field form-control', placeholder: "search #{model.name.pluralize}"
-      = button_tag(type: :submit, class: 'search-widget-form-submit btn btn-default') do
+      = button_tag(type: :submit, class: 'search-widget-form-submit btn btn-default', title: :search) do
         = icon("search")
