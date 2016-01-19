@@ -10,5 +10,12 @@
 # Data that is required by the application across all environments (i.e. reference data) should _not_ be included here.
 # That belongs in seeds.rb instead.
 
+if Rails.env.test?
+  require_relative '../spec/support/test_es_server'
+  TestEsServer.start
+end
 require_relative 'sample_data/posts'
 require_relative 'sample_data/authors'
+if Rails.env.test?
+  TestEsServer.stop
+end
