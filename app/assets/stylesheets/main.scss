@@ -6,3 +6,24 @@
     }
   }
 }
+
+body {
+  &:after {
+    content: '';
+    opacity: 0.15;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: image-url('Elastigirl_4.jpg');
+    background-position: left top;
+    background-size: cover;
+    filter: grayscale(80%);
+    -webkit-filter: grayscale(80%);
+    -moz-filter:    grayscale(80%);
+    -ms-filter:     grayscale(80%);
+    -o-filter:      grayscale(80%);
+
+  }
+}
