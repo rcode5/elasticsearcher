@@ -9,10 +9,4 @@ feature "Static Pages" do
     expect(page).to have_title "Elasticsearcher"
   end
 
-  # Another contrived example, this one relies on the javascript driver.
-  scenario "/ should include the warm closing text 'Enjoy!'", js: true do
-    visit root_path
-
-    expect(page).to have_content "Enjoy!"
-  end
 end

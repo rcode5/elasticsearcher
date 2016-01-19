@@ -1,6 +1,13 @@
 # Elasticsearcher
 
-...
+Playtime app to learn about different ways to use Elasticsearch with the `elasticsearch-ruby`
+and `elasticsearch-rails` gems.
+
+## Models
+
+* Post(:title, :body)
+* Author(:name, :hometown)
+
 
 Generated with [Raygun](https://github.com/carbonfive/raygun).
 
@@ -16,6 +23,7 @@ To run the specs or fire up the server, be sure you have these installed (and ru
 * PostgreSQL 9.x (```brew install postgresql```) with superuser 'postgres' with no password
   (```createuser -s postgres```).
 * PhantomJS for Capybara and Javascript testing (```brew install phantomjs```).
+* Elasticsearch >= 2.0.x for testing (```brew install elasticsearch```).
 
 ### First Time Setup
 

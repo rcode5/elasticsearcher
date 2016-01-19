@@ -1,0 +1,16 @@
+= link_to text_with_icon('New Post', 'plus'), new_post_path, class: 'btn btn-primary pull-right'
+table.table.table-striped.table-hover
+  thead
+    tr
+      th Title
+      th Body
+      th
+  tbody
+    - posts.each do |post|
+      tr
+        td= link_to post.title, post_path(post)
+        td= post.body
+        td.actions
+          = link_to icon('edit', 'Edit'), edit_post_path(post), class: 'btn btn-default btn-xs'
+          = link_to icon('remove', 'Destroy'), post_path(post),
+                    method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-default btn-xs btn-danger'

@@ -1,0 +1,16 @@
+= link_to text_with_icon('New Author', 'plus'), new_author_path, class: 'btn btn-primary pull-right'
+table.table.table-striped.table-hover
+  thead
+    tr
+      th Name
+      th Hometown
+      th
+  tbody
+    - authors.each do |author|
+      tr
+        td= link_to author.name, author_path(author)
+        td= author.hometown
+        td.actions
+          = link_to icon('edit', 'Edit'), edit_author_path(author), class: 'btn btn-default btn-xs'
+          = link_to icon('remove', 'Destroy'), author_path(author),
+                    method: :delete, data: { confirm: "Are you sure?" }, class: 'btn btn-default btn-xs btn-danger'

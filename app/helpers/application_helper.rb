@@ -6,8 +6,8 @@ module ApplicationHelper
   end
 
   # generate a standard bootstrap glyphicon
-  def icon(name)
-    content_tag(:span, nil, class: "glyphicon glyphicon-#{name}")
+  def icon(name, title = nil)
+    content_tag(:span, nil, class: "glyphicon glyphicon-#{name}", title: title)
   end
 
   # action name to use for the primary submit button on scaffold-created CRUD forms

@@ -9,3 +9,6 @@
 #
 # Data that is required by the application across all environments (i.e. reference data) should _not_ be included here.
 # That belongs in seeds.rb instead.
+
+require_relative 'sample_data/posts'
+require_relative 'sample_data/authors'
