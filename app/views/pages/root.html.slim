@@ -7,4 +7,7 @@
     = render '/authors/index_table', authors: @authors
 .row
   .col-xs-12
+    = link_to "Reindex All", api_reindex_path, class: 'btn btn-success'
+.row
+  .col-xs-12
     #js-search-results
