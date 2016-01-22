@@ -2,7 +2,7 @@ module Api
   class SearchController < ApplicationController
 
     def reindex
-      models = [Post, Author]
+      models = [Post, Author, Ngram::Author]
       models.each do |clz|
         clz.import force: true
       end

@@ -16,6 +16,9 @@ Elasticsearcher::Application.routes.draw do
     match "/reindex" => 'search#reindex', via: [:get]
   end
 
+  match '/search/:query' => 'search#search', via: [:get], as: :search
+  match '/search' => 'search#search', via: [:post]
+
   root to: 'pages#root'
 
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
