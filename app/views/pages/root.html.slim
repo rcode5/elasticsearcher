@@ -1,21 +1,23 @@
 .row
   .col-xs-6.posts
-    = render '/common/search_widget', model: Post
+    h3 Posts
     = render '/posts/index_table', posts: @posts
   .col-xs-6.authors
-    = render '/common/search_widget', model: Author
+    h3 Authors
     = render '/authors/index_table', authors: @authors
 .row
+  .col-xs-6.posts
+    = render '/common/search_widget', model: Post
+  .col-xs-6.authors
+    = render '/common/search_widget', model: Author
   .col-xs-6
     .search-all-widget class="search-widget-for-all"
-
-      = form_tag :search, url: search_path, remote: true, class: 'search-widget-form form-horizontal' do
+      h3 Search All Models
+      = form_tag "/search", remote: true, class: 'search-widget-form form-horizontal' do
         .form-group
           = text_field_tag :query, @query, class: 'search-widget-form-query-field form-control', placeholder: "search all"
           = button_tag(type: :submit, class: 'search-widget-form-submit btn btn-default', title: :search) do
             = icon("search")
-
-    = link_to "Reindex All", api_reindex_path, class: 'btn btn-success'
 .row
   .col-xs-12
     #js-search-results

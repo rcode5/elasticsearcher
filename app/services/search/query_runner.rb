@@ -14,7 +14,7 @@ module Search
     def multi_index_search
       EsClient.client.search(
         {
-          index: [:art_pieces, :studios, :artists].join(","),
+          index: [:authors, :posts].join(","),
           body: {
             query: {
               match: {
@@ -22,16 +22,16 @@ module Search
               }
             },
             size: 100,
-            highlight: {
-              fields: {
-                "name" => {},
-                "tags" => {},
-                "title" => {},
-                "artist_name" => {},
-                "artist_bio" => {},
-                "bio" => {}
-              }
-            }
+            # highlight: {
+            #   fields: {
+            #     "name" => {},
+            #     "tags" => {},
+            #     "title" => {},
+            #     "artist_name" => {},
+            #     "artist_bio" => {},
+            #     "bio" => {}
+            #   }
+            # }
           }
         })
     end

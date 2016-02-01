@@ -9,10 +9,18 @@
     .row
       .col-xs-12
         = render '/common/search_widget', model: model_class, query: query
-  .row
-    .col-xs-12
-      ul.search-results
-        - results.each do |result|
-          li.search-result
-            - result.attributes.each do |k,v|
-              .attr = "#{k} => #{v}"
+  - if results.present?
+    - results.by_type.each do |type, typed_results|
+      .row
+        .col-xs-12
+          h3 = type.humanize.capitalize
+          table.search-results.table.table-condensed.table-striped
+            thead
+              tr
+                - typed_results.first.attributes(&:first).keys.each do |key|
+                  th = key.to_s.humanize.capitalize
+            tbody
+              - typed_results.each do |result|
+                tr.search-result
+                  - result.attributes.each do |k,v|
+                    td.attr = v

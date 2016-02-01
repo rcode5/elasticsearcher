@@ -10,7 +10,7 @@ dl
 /- if can?(:edit, @author)
 = link_to text_with_icon('Edit', 'edit'), edit_author_path(@author), class: 'btn btn-default'
 '
-= link_to text_with_icon('Back', 'chevron-left'), :back, class: 'btn btn-default'
+= link_to text_with_icon('Back', 'chevron-left'), authors_path, class: 'btn btn-default'
 
 /- if can?(:destroy, @author)
 '
