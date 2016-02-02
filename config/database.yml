@@ -16,10 +16,10 @@ test:
   min_messages: warning
   pool: 5
 
-acceptance:
-  <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
+# acceptance:
+#   <<: *default
+#   url: <%= ENV['DATABASE_URL'] %>
 
-production:
-  <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
+# production:
+#   <<: *default
+#   url: <%= ENV['DATABASE_URL'] %>
