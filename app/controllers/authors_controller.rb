@@ -20,7 +20,7 @@ class AuthorsController < ApplicationController
     @author = Author.new(author_params)
 
     if @author.save
-      redirect_to @author, notice: 'Author was successfully created.'
+      redirect_to @author, notice: "I love new stuff! You just created #{@author.name}."
     else
       render :new
     end
@@ -28,7 +28,7 @@ class AuthorsController < ApplicationController
 
   def update
     if @author.update(author_params)
-      redirect_to @author, notice: 'Author was successfully updated.'
+      redirect_to @author, notice: "I love keeping data current! You just updated #{@author.name}."
     else
       render :edit
     end
@@ -36,7 +36,7 @@ class AuthorsController < ApplicationController
 
   def destroy
     @author.destroy
-    redirect_to root_path, notice: 'Author was successfully destroyed.'
+    redirect_to root_path, notice: "I love taking out the trash!  #{@author.name} just got dumped."
   end
 
   private
