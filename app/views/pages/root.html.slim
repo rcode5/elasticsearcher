@@ -1,4 +1,7 @@
 .row
+  .col-xs-12
+    = link_to icon("refresh"), api_reindex_path, class: 'btn btn-success pull-right', title: "Reindex"
+.row
   .col-xs-6.posts
     h3 Posts
     = render '/posts/index_table', posts: @posts
