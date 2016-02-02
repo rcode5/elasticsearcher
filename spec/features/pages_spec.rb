@@ -33,7 +33,7 @@ feature "Root", elasticsearch: true  do
     within '#js-search-results' do
       expect(page).to have_content "Searching Post with"
       expect(page).to have_content common_term
-      expect(page).to have_css 'li.search-result'
+      expect(page).to have_css 'tr.search-result'
     end
   end
 
@@ -46,7 +46,7 @@ feature "Root", elasticsearch: true  do
     within '#js-search-results' do
       expect(page).to have_content "Searching Author with"
       expect(page).to have_content common_term
-      expect(page).to have_css 'li.search-result'
+      expect(page).to have_css 'tr.search-result'
     end
   end
 
