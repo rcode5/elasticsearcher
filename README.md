@@ -3,6 +3,9 @@
 Playtime app to learn about different ways to use Elasticsearch with the `elasticsearch-ruby`
 and `elasticsearch-rails` gems.
 
+This app will attempt to make several different queries that will query against a couple of simple models
+and hopefully shed some light on how configure and use Elasticsearch beyond the simplest of queries.
+
 ## Models
 
 * Post(:title, :body)
@@ -11,6 +14,8 @@ and `elasticsearch-rails` gems.
 ## Connecting to Elasticsearch
 
 Elasticsearch's ruby client looks for ELASTICSEARCH_URL to specify where to point queries.
+This should be set in `.env.local` if you're using something other than the default `localhost:9200`
+
 When we run our test server, the test cluster looks for several other environment variables
 (see [elasticsearch-extensions gem](https://github.com/elastic/elasticsearch-ruby/blob/master/elasticsearch-extensions/lib/elasticsearch/extensions/test/cluster.rb) for details).  In this app, we leverage
 
@@ -36,7 +41,7 @@ To run the specs or fire up the server, be sure you have these installed (and ru
 * PostgreSQL 9.x (```brew install postgresql```) with superuser 'postgres' with no password
   (```createuser -s postgres```).
 * PhantomJS for Capybara and Javascript testing (```brew install phantomjs```).
-* Elasticsearch >= 2.0.x for testing (```brew install elasticsearch```).
+* Elasticsearch >= 2.0.x (```brew install elasticsearch``` and start it up as a service (`launchctl`)
 
 ### First Time Setup
 
@@ -64,7 +69,8 @@ can add ```./bin``` to your PATH too, then you'll always use the springified bin
 
 ### Git
 
-* Branch ```development``` is auto-deployed to acceptance.
+Because this app is pretty new and mostly playtime, we only have `master` and feature branches.
+
 * Branch ```master``` is auto-deployed to production.
 * Create feature branches off of ```development``` using the naming convention
   ```(features|chores|bugs)/a-brief-description-######```, where ###### is the tracker id.
