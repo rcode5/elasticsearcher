@@ -40,5 +40,7 @@ module Elasticsearcher
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    config.elasticsearch_url = ENV.fetch('ELASTICSEARCH_URL', 'http://localhost:9200')
   end
 end

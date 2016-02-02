@@ -1,5 +1,7 @@
 / expects model as a ruby class
 - model_string = model.name.tableize
+h3 Search #{model_string}
+
 .search-widget class="search-widget-for-#{model_string}"
   = form_tag "/#{model_string}/search", remote: true, class: 'search-widget-form form-horizontal' do
     .form-group

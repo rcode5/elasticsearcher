@@ -1,5 +1,11 @@
 class SearchResultPresenter < BasePresenter
 
+  EXCLUDED_ATTRIBUTES = %w| created_at updated_at |
+
+  def type
+    @model._type
+  end
+
   def source
     @model._source
   end
@@ -13,7 +19,10 @@ class SearchResultPresenter < BasePresenter
   end
 
   def attributes(&block)
-    @model._source.to_hash.each(&block)
+    attrs = {
+      type: type
+    }.merge @model._source.to_hash.except( *EXCLUDED_ATTRIBUTES )
+    attrs.each(&block)
   end
 
 end
