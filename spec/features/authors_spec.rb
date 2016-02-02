@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "Authors" do
+feature "Authors", elasticsearch: true, js: true do
 
   background do
     visit root_path

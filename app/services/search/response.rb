@@ -5,6 +5,7 @@ module Search
       results ||= {}
       super(results)
       @source = results
+      puts "ES Response: #{@source.to_json}"
     end
 
     def results

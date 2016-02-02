@@ -12,28 +12,33 @@ module Search
     end
 
     def multi_index_search
-      EsClient.client.search(
-        {
-          index: [:authors, :posts].join(","),
-          body: {
-            query: {
-              match: {
-                '_all' => @query
-              }
-            },
-            size: 100,
-            highlight: {
-              fields: {
-                "name" => {},
-                "tags" => {},
-                "title" => {},
-                "artist_name" => {},
-                "artist_bio" => {},
-                "bio" => {}
-              }
+      fields_across_models = %w| _all title body name hometown |
+      search_params = {
+        index: [:authors, :posts].join(","),
+        body: {
+          query: {
+            multi_match: {
+              query: @query,
+              type: :best_fields, # default - could be left out
+              fields: fields_across_models
+            }
+          },
+          size: 100,
+          highlight: {
+            pre_tags: ["<strong>"],
+            post_tags: ["</strong>"],
+            fields: {
+              '_all' => {},
+              'title' => {},
+              'body' => {},
+              'hometown' => {},
+              'name' => {}
             }
           }
-        })
+        }
+      }
+      puts "ES Query: #{search_params[:body].to_json}"
+      EsClient.client.search(search_params)
     end
 
     def es_client
