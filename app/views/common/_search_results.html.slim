@@ -1,26 +1,22 @@
 / expects model_class, query and results
 / optional search_box: boolean to show or hide search form
 - search_box ||= search_box
-.container-fluid
-  h2 Searching #{model_class.name} with query &ldquo;#{query}&rdquo;
-  - if results.empty?
-    .alert.alert-warning Nothing to see here
-  - if search_box
-    .row
-      .col-xs-12
-        = render '/common/search_widget', model: model_class, query: query
-  - if results.present?
-    - results.by_type.each do |type, typed_results|
-      .row
-        .col-xs-12
-          h3 = type.humanize.capitalize
-          table.search-results.table.table-condensed.table-striped
-            thead
-              tr
-                - typed_results.first.attributes(&:first).keys.each do |key|
-                  th = key.to_s.humanize.capitalize
-            tbody
-              - typed_results.each do |result|
-                tr.search-result
-                  - result.attributes.each do |k,v|
-                    td.attr = v
+.mod-spacer
+h2 Searching #{model_class.name} with query &ldquo;#{query}&rdquo;
+- if results.empty?
+  .alert.alert-warning Nothing to see here
+- if search_box
+  = render '/common/search_widget', model: model_class, query: query
+- if results.present?
+  - results.by_type.each do |type, typed_results|
+    h3 = type.humanize.capitalize
+    table.search-results.table.table-condensed.table-striped
+      thead
+        tr
+          - typed_results.first.attributes(&:first).keys.each do |key|
+            th = key.to_s.humanize.capitalize
+      tbody
+        - typed_results.each do |result|
+          tr.search-result
+            - result.attributes.each do |k,v|
+              td.attr = v
