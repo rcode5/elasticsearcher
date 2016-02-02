@@ -8,6 +8,7 @@ module ES
 
     def search
       es_results = @model_class.search(@query)
+      @es_query = es_results.search.definition
       @search_results = SearchResultsPresenter.new(Search::Response.new(es_results.response))
       respond_to do |fmt|
         fmt.js { render '/common/search' }

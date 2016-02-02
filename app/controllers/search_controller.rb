@@ -4,7 +4,10 @@ class SearchController < ApplicationController
 
   before_action :set_query, :set_results_dom_id
   def search
-    @search_results = SearchResultsPresenter.new(Search::QueryRunner.new(@query).search)
+    query_runner = Search::QueryRunner.new(@query)
+    es_results = query_runner.search
+    @es_query = query_runner.query_body
+    @search_results = SearchResultsPresenter.new(es_results)
     respond_to do |fmt|
       fmt.js {
         @model_class = OpenStruct.new(name: "All")
