@@ -1,10 +1,13 @@
 / expects model as a ruby class
+/ optional results_dom_id for where to stick the results
 - model_string = model.name.tableize
+- results_dom_id ||= "js-search-results"
 h3 Search #{model_string}
 
 .search-widget class="search-widget-for-#{model_string}"
   = form_tag "/#{model_string}/search", remote: true, class: 'search-widget-form form-horizontal' do
     .form-group
+      = hidden_field_tag :results_dom_id, results_dom_id
       = text_field_tag :query, @query, class: 'search-widget-form-query-field form-control', placeholder: "search #{model.name.pluralize}"
       = button_tag(type: :submit, class: 'search-widget-form-submit btn btn-default', title: :search) do
         = icon("search")

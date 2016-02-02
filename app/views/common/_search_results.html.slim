@@ -13,10 +13,10 @@ h2 Searching #{model_class.name} with query &ldquo;#{query}&rdquo;
     table.search-results.table.table-condensed.table-striped
       thead
         tr
-          - typed_results.first.attributes(&:first).keys.each do |key|
+          - typed_results.first.fields.each do |key|
             th = key.to_s.humanize.capitalize
       tbody
         - typed_results.each do |result|
           tr.search-result
-            - result.attributes.each do |k,v|
-              td.attr = v
+            - result.each do |k,v|
+              td.attr == v

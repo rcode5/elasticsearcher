@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "Posts" do
+feature "Posts", elasticsearch: true, js: true do
 
   background do
     visit root_path

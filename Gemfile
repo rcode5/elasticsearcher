@@ -41,6 +41,7 @@ end
 
 group :test, :development do
   gem 'rspec-rails'
+  gem 'rspec-its'
   gem 'rspec-collection_matchers'
   gem 'factory_girl_rails'
   gem 'jasmine-rails'

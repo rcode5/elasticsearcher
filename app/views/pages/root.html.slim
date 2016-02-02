@@ -1,6 +1,6 @@
 .row
   .col-xs-12
-    = link_to icon("refresh"), api_reindex_path, class: 'btn btn-success pull-right', title: "Reindex"
+    = link_to icon('refresh'), api_reindex_path, class: 'btn btn-success pull-right', title: 'Reindex'
 .row
   .col-xs-6.posts
     h3 Posts
@@ -8,19 +8,34 @@
   .col-xs-6.authors
     h3 Authors
     = render '/authors/index_table', authors: @authors
-.row
-  .col-xs-6.posts
-    = render '/common/search_widget', model: Post
-  .col-xs-6.authors
-    = render '/common/search_widget', model: Author
-  .col-xs-6
-    .search-all-widget class="search-widget-for-all"
-      h3 Search All Models
-      = form_tag "/search", remote: true, class: 'search-widget-form form-horizontal' do
-        .form-group
-          = text_field_tag :query, @query, class: 'search-widget-form-query-field form-control', placeholder: "search all"
-          = button_tag(type: :submit, class: 'search-widget-form-submit btn btn-default', title: :search) do
-            = icon("search")
-.row
-  .col-xs-12
-    #js-search-results
+
+ul.nav.nav-tabs role='tablist'
+  li.active role='presentation'
+    = link_to "Post & Author (all fields)", '#post_and_author', "role" => :tab, "data-toggle" => :tab
+  li role='presentation'
+    = link_to "Post | Author", '#post_or_author', "role" => :tab, "data-toggle" => :tab
+
+.tab-content
+  .tab-pane.active role='tabpanel' id='post_and_author'
+    .row
+      .col-xs-6
+        .search-all-widget class='search-widget-for-all'
+          h3 Search All Models
+          = form_tag '/search', remote: true, class: 'search-widget-form form-horizontal' do
+            .form-group
+              = hidden_field_tag :results_dom_id, "js-posts-and-authors-search-results"
+              = text_field_tag :query, @query, class: 'search-widget-form-query-field form-control', placeholder: 'search all'
+              = button_tag(type: :submit, class: 'search-widget-form-submit btn btn-default', title: :search) do
+                = icon('search')
+    .row
+      .col-xs-12
+        .js-search-results#js-posts-and-authors-search-results
+  .tab-pane role='tabpanel' id='post_or_author'
+    .row
+      .col-xs-6.posts
+        = render '/common/search_widget', model: Post, results_dom_id: 'js-posts-or-authors-search-results'
+      .col-xs-6.authors
+        = render '/common/search_widget', model: Author, results_dom_id: 'js-posts-or-authors-search-results'
+    .row
+      .col-xs-12
+        .js-search-results#js-posts-or-authors-search-results

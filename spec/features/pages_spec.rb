@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "Root", elasticsearch: true  do
+feature "Root", elasticsearch: true, js: true  do
 
   background do
     create_list :post, 2
@@ -25,6 +25,7 @@ feature "Root", elasticsearch: true  do
   end
 
   scenario "I can query a post", js: true do
+    click_on "Post | Author"
     common_term = histogram_of(Post, :body).sort_by(&:last).last.first
     within ".search-widget-for-posts" do
       fill_in "query", with: common_term
@@ -38,6 +39,7 @@ feature "Root", elasticsearch: true  do
   end
 
   scenario "I can query a author", js: true do
+    click_on "Post | Author"
     common_term = histogram_of(Author, :name).sort_by(&:last).last.first
     within ".search-widget-for-authors" do
       fill_in "query", with: common_term

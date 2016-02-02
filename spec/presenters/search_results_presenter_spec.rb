@@ -4,9 +4,9 @@ describe SearchResultsPresenter do
 
   let(:results) {
     [
-      OpenStruct.new( _type: 'model1' ),
-      OpenStruct.new( _type: 'model2' ),
-      OpenStruct.new( _type: 'model1' ),
+      Search::Result.new( { "_type" => 'model1' } ),
+      Search::Result.new( { "_type" => 'model2' } ),
+      Search::Result.new( { "_type" => 'model1' } ),
     ]
   }
 
@@ -30,7 +30,7 @@ describe SearchResultsPresenter do
       expect(subject.by_type['model2']).to have(1).result
     end
 
-    it "returns results as arrays of SearchResultsPresenters" do
+    it "returns results as arrays of Search::ResultsPresenters" do
       expect(subject.by_type.values.flatten.all? { |v| v.is_a? SearchResultPresenter }).to eql true
     end
 

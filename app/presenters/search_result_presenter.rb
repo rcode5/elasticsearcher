@@ -2,27 +2,23 @@ class SearchResultPresenter < BasePresenter
 
   EXCLUDED_ATTRIBUTES = %w| created_at updated_at |
 
-  def type
-    @model._type
+  def initialize(result)
+    super(result)
+    @model = result
   end
 
-  def source
-    @model._source
+  def score
+    "%2.2f" % @model.score
   end
 
   def fields
-    @model._source.keys
+    [:score, :type, @model.source.to_hash.except( *EXCLUDED_ATTRIBUTES ).keys ].flatten
   end
 
-  def value(fld)
-    @model._source[fld]
-  end
-
-  def attributes(&block)
-    attrs = {
-      type: type
-    }.merge @model._source.to_hash.except( *EXCLUDED_ATTRIBUTES )
-    attrs.each(&block)
+  def each(&block)
+    fields.each do |field|
+      block.call field, self.send(field)
+    end
   end
 
 end

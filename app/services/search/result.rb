@@ -1,19 +1,25 @@
 module Search
-  class Result < SimpleDelegator
+  class Result
+
+    attr_reader :type, :score, :source
+
     def initialize(hit)
-      @hit = process(hit)
-      super(@hit)
-    end
+      @type = hit['_type']
+      @score = hit['_score']
+      @source = (hit['_source'] || {}).with_indifferent_access
+      @highlight = (hit['highlight'] || {}).with_indifferent_access
 
-    private
-
-    def process(hit)
-      highlights = hit['highlight'] || {}
-      highlights.each do |full_field, value|
-        field1, field2 = full_field.split(".")
-        hit["_source"][field1][field2] = value if [field1,field2,value].all?(&:present?)
+      @source.keys.each do |meth|
+        if !self.respond_to? meth
+          (class << self; self; end).class_eval do
+            define_method meth do |*args|
+              field = meth.to_s.split('.')
+              @highlight.dig( *field )&.join || @source.dig( *field )
+            end
+          end
+        end
       end
-      OpenStruct.new(hit)
     end
+
   end
 end
