@@ -31,7 +31,7 @@ feature "Root", elasticsearch: true, js: true  do
       fill_in "query", with: common_term
       click_on "search"
     end
-    within '#js-search-results' do
+    within '#js-posts-or-authors-search-results' do
       expect(page).to have_content "Searching Post with"
       expect(page).to have_content common_term
       expect(page).to have_css 'tr.search-result'
@@ -45,7 +45,7 @@ feature "Root", elasticsearch: true, js: true  do
       fill_in "query", with: common_term
       click_on "search"
     end
-    within '#js-search-results' do
+    within '#js-posts-or-authors-search-results' do
       expect(page).to have_content "Searching Author with"
       expect(page).to have_content common_term
       expect(page).to have_css 'tr.search-result'

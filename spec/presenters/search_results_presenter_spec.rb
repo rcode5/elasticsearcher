@@ -2,13 +2,34 @@ require 'rails_helper'
 
 describe SearchResultsPresenter do
 
-  let(:results) {
-    [
-      Search::Result.new( { "_type" => 'model1' } ),
-      Search::Result.new( { "_type" => 'model2' } ),
-      Search::Result.new( { "_type" => 'model1' } ),
-    ]
+  let(:es_response) {
+    {
+      "took"=>45,
+      "hits"=> {
+        "total"=>3,
+        "hits"=> [
+          {
+            "_type"=>"model1",
+            "_id"=>"2",
+            "_score"=>0.058131136,
+          },
+          {
+            "_type"=>"model2",
+            "_id"=>"1",
+            "_score"=>0.04982669,
+          },
+          {
+            "_type"=>"model1",
+            "_id"=>"1",
+            "_score"=>0.01982669,
+          }
+        ]
+      }
+    }
   }
+
+
+  let(:results) { Search::Response.new(es_response) }
 
   subject(:presenter) { described_class.new(results) }
 
