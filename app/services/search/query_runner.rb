@@ -1,6 +1,20 @@
 module Search
+
+  class InvalidQueryTypeError < StandardError; end
+
   class QueryRunner
-    def initialize(query = nil, include_highlight = true)
+
+    AVAILABLE_TYPES = %w|standard_indexing snowball ngram|
+    DEFAULT_QUERY_TYPE = :standard_indexing
+
+    attr_reader :type, :query, :include_highlight
+
+    def initialize(query, type: nil, include_highlight: true)
+      @include_highlight = include_highlight
+      @type = type || DEFAULT_QUERY_TYPE
+
+      raise Search::InvalidQueryTypeError.new("#{@type} is not a valid query type.  Try one of these: #{AVAILABLE_TYPES.join(',')}") unless AVAILABLE_TYPES.include?(@type.to_s)
+
       @query = query
     end
 
@@ -12,6 +26,25 @@ module Search
     end
 
     def query_body
+      self.send(type)
+    end
+
+    def multi_index_search
+      search_params = {
+        index: [:authors, :posts].join(","),
+        body: query_body
+      }
+      puts "ES Query: #{query_body.to_json}"
+      EsClient.client.search(search_params)
+    end
+
+    def es_client
+      es.client
+    end
+
+    private
+
+    def standard_indexing
       fields_across_models = %w| _all title body name hometown |
       {
         query: {
@@ -36,17 +69,5 @@ module Search
       }
     end
 
-    def multi_index_search
-      search_params = {
-        index: [:authors, :posts].join(","),
-        body: query_body
-      }
-      puts "ES Query: #{query_body.to_json}"
-      EsClient.client.search(search_params)
-    end
-
-    def es_client
-      es.client
-    end
   end
 end

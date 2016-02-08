@@ -22,6 +22,7 @@ gem 'awesome_print'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 
+gem 'coderay'
 
 group :production, :acceptance do
   gem 'rack-timeout'

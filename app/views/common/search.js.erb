@@ -1,1 +1,5 @@
-$("#<%= @results_dom_id %>").html("<%= escape_javascript(render '/common/search_results', model_class: @model_class, query: @query, es_query: @es_query, results: @search_results, search_box: false) %>");
+var results = $("#<%= @results_dom_id %>");
+results.html("<%= escape_javascript(render '/common/search_results', model_class: @model_class, query: @query, es_query: @es_query, results: @search_results, search_box: false) %>");
+results.addClass('rubberBand animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+  $(this).removeClass();
+});

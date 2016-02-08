@@ -27,5 +27,5 @@
 
       .search-results-main-query
         h4 Query
-        code
-          = es_query.to_json
+        .search-results-main-query-json
+          == CodeRay.scan(JSON.pretty_generate(es_query), :json).div(css: :class)

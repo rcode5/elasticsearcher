@@ -319,6 +319,7 @@ DEPENDENCIES
   bootstrap-sass
   byebug
   capybara
+  coderay
   coffee-rails
   database_cleaner
   dotenv-rails

@@ -1,3 +1,7 @@
+/*
+ * = require 'animate'
+ */
+
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
 @import '_navbar';
@@ -5,3 +9,4 @@
 @import 'main';
 @import 'search_widget';
 @import 'search_results';
+@import 'coderay';
