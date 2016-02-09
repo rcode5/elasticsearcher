@@ -23,6 +23,8 @@ ul.nav.nav-tabs role='tablist'
           h3 Search All Models
           = form_tag '/search', remote: true, class: 'search-widget-form form-horizontal' do
             .form-group
+              = select_tag :type, options_for_select(Search::QueryRunner::AVAILABLE_TYPES.map {|t| [t,t]}, @query_type), class:'form-control'
+            .form-group
               = hidden_field_tag :results_dom_id, "js-posts-and-authors-search-results"
               = text_field_tag :query, @query, class: 'search-widget-form-query-field form-control', placeholder: 'search all'
               = button_tag(type: :submit, class: 'search-widget-form-submit btn btn-default', title: :search) do
