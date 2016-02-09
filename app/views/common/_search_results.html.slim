@@ -1,22 +1,31 @@
 / expects model_class, query and results
 / optional search_box: boolean to show or hide search form
 - search_box ||= search_box
+- es_query ||= {}
 .mod-spacer
-h2 Searching #{model_class.name} with query &ldquo;#{query}&rdquo;
-- if results.empty?
-  .alert.alert-warning Nothing to see here
-- if search_box
-  = render '/common/search_widget', model: model_class, query: query
-- if results.present?
-  - results.by_type.each do |type, typed_results|
-    h3 = type.humanize.capitalize
-    table.search-results.table.table-condensed.table-striped
-      thead
-        tr
-          - typed_results.first.fields.each do |key|
-            th = key.to_s.humanize.capitalize
-      tbody
-        - typed_results.each do |result|
-          tr.search-result
-            - result.each do |k,v|
-              td.attr == v
+.row
+  .col-xs-12.search-results-sidebar
+    h3 Searching #{model_class.name} with query &ldquo;#{query}&rdquo;
+  .col-xs-12.search-results-main
+    - if results.empty?
+      .alert.alert-warning Nothing to see here
+    - if search_box
+      = render '/common/search_widget', model: model_class, query: query
+    - if results.present?
+      - results.by_type.each do |type, typed_results|
+        h4 = type.humanize.upcase
+        table.search-results.table.table-condensed.table-striped
+          thead
+            tr
+              - typed_results.first.fields.each do |key|
+                th = key.to_s.humanize.capitalize
+          tbody
+            - typed_results.each do |result|
+              tr.search-result
+                - result.each do |k,v|
+                  td.attr == v
+
+      .search-results-main-query
+        h4 Query
+        .search-results-main-query-json
+          == CodeRay.scan(JSON.pretty_generate(es_query), :json).div(css: :class)
