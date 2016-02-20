@@ -44,19 +44,13 @@ module Search
     private
 
     class QueryBody
-      def self.ngram(query)
+      def self.snowball(query)
         {
           query: {
-            bool: {
-              should: [
-                {
-                  term: { ngram_title: query }
-                },
-                {
-                  term: { ngram_body: query }
-                }
-              ],
-              minimum_should_match: 1
+            multi_match: {
+              query: query,
+              type: :best_fields,
+              fields: %w| snowball_title snowball_body snowball_name snowball_hometown |
             }
           },
           size: 100,
@@ -64,8 +58,27 @@ module Search
             pre_tags: ["<strong>"],
             post_tags: ["</strong>"],
             fields: {
-              'ngram_title' => {},
-              'ngram_body' => {},
+              '*' => {},
+            }
+          }
+        }
+      end
+
+      def self.ngram(query)
+        {
+          query: {
+            multi_match: {
+              query: query,
+              type: :best_fields,
+              fields: %w| ngram_title ngram_body ngram_name ngram_hometown |
+            }
+          },
+          size: 100,
+          highlight: {
+            pre_tags: ["<strong>"],
+            post_tags: ["</strong>"],
+            fields: {
+              '*' => {},
             }
           }
         }

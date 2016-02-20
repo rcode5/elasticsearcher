@@ -19,9 +19,9 @@ module Search
 
     SNOWBALL_ANALYZER = {
       snowball_analyzer: {
-        type: :custom,
-        filter: %w| standard lowercase snowball |,
-        tokenizer: :standard
+        type: :snowball,
+        language: "English",
+        filter: %w| standard lowercase |
       }
     }
 
