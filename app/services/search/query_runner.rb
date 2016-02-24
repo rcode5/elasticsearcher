@@ -4,13 +4,12 @@ module Search
 
   class QueryRunner
 
-    AVAILABLE_TYPES = %w|standard_indexing snowball ngram|
-    DEFAULT_QUERY_TYPE = :standard_indexing
+    AVAILABLE_TYPES = %w|standard snowball ngram|
+    DEFAULT_QUERY_TYPE = :standard
 
-    attr_reader :type, :query, :include_highlight
+    attr_reader :type, :query
 
-    def initialize(query, type: nil, include_highlight: true)
-      @include_highlight = include_highlight
+    def initialize(query, type: nil)
       @type = type || DEFAULT_QUERY_TYPE
 
       raise Search::InvalidQueryTypeError.new("#{@type} is not a valid query type.  Try one of these: #{AVAILABLE_TYPES.join(',')}") unless AVAILABLE_TYPES.include?(@type.to_s)
@@ -26,7 +25,7 @@ module Search
     end
 
     def query_body
-      self.send(type)
+      QueryBody.send(type, query)
     end
 
     def multi_index_search
@@ -44,30 +43,71 @@ module Search
 
     private
 
-    def standard_indexing
-      fields_across_models = %w| _all title body name hometown |
-      {
-        query: {
-          multi_match: {
-            query: @query,
-            type: :best_fields, # default - could be left out
-            fields: fields_across_models
-          }
-        },
-        size: 100,
-        highlight: {
-          pre_tags: ["<strong>"],
-          post_tags: ["</strong>"],
-          fields: {
-            '_all' => {},
-            'title' => {},
-            'body' => {},
-            'hometown' => {},
-            'name' => {}
+    class QueryBody
+      def self.snowball(query)
+        {
+          query: {
+            multi_match: {
+              query: query,
+              type: :best_fields,
+              fields: %w| snowball_title snowball_body snowball_name snowball_hometown |
+            }
+          },
+          size: 100,
+          highlight: {
+            pre_tags: ["<strong>"],
+            post_tags: ["</strong>"],
+            fields: {
+              '*' => {},
+            }
           }
         }
-      }
-    end
+      end
 
+      def self.ngram(query)
+        {
+          query: {
+            multi_match: {
+              query: query,
+              type: :best_fields,
+              fields: %w| ngram_title ngram_body ngram_name ngram_hometown |
+            }
+          },
+          size: 100,
+          highlight: {
+            pre_tags: ["<strong>"],
+            post_tags: ["</strong>"],
+            fields: {
+              '*' => {},
+            }
+          }
+        }
+      end
+
+      def self.standard(query)
+        fields_across_models = %w| _all title body name hometown |
+        {
+          query: {
+            multi_match: {
+              query: query,
+              type: :best_fields, # default - could be left out
+              fields: fields_across_models
+            }
+          },
+          size: 100,
+          highlight: {
+            pre_tags: ["<strong>"],
+            post_tags: ["</strong>"],
+            fields: {
+              '_all' => {},
+              'title' => {},
+              'body' => {},
+              'hometown' => {},
+              'name' => {}
+            }
+          }
+        }
+      end
+    end
   end
 end

@@ -11,7 +11,7 @@ module Search
     NGRAM_TOKENIZER = {
       ngram_tokenizer: {
         type: 'nGram',
-        min_gram: 4,
+        min_gram: 3,
         max_gram: 10,
         token_chars: [ :letter, :digit ]
       }
@@ -19,9 +19,9 @@ module Search
 
     SNOWBALL_ANALYZER = {
       snowball_analyzer: {
-        type: :custom,
-        filter: %w| standard lowercase snowball |,
-        tokenizer: :standard
+        type: :snowball,
+        language: "English",
+        filter: %w| standard lowercase |
       }
     }
 
