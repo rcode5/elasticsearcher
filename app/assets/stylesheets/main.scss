@@ -15,19 +15,26 @@
 }
 
 body {
-  &:after {
-    content: '';
-    opacity: 0.15;
-    position: absolute;
+  #bg {
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: image-url('Elastigirl_4.jpg');
-    background-position: left top;
-    background-size: cover;
-    filter: grayscale(80%);
-    z-index: -1000;
+    &:after {
+      content: '';
+      opacity: 0.15;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: image-url('Elastigirl_4.jpg');
+      background-position: left top;
+      background-size: cover;
+      filter: grayscale(80%);
+      z-index: -1000;
+    }
   }
 }
 
