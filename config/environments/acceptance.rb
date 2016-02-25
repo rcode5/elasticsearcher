@@ -4,5 +4,5 @@ require Rails.root.join('config/environments/production')
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb and config/production.rb.
 
-  config.action_mailer.default_url_options = { host: 'elasticsearcher-acceptance.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'elasticsearchr-acceptance.herokuapp.com' }
 end

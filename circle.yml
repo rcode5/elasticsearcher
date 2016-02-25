@@ -1,6 +1,6 @@
 machine:
   environment:
-    TEST_CLUSTER_COMMAND: ~/elasticsearcher/elasticsearch-2.0.1/bin/elasticsearch
+    TEST_CLUSTER_COMMAND: ~/elasticsearchr/elasticsearch-2.0.1/bin/elasticsearch
 dependencies:
   post:
     - wget http://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-2.0.1.tar.gz
@@ -18,12 +18,12 @@ test:
 #   acceptance:
 #     branch: development
 #     commands:
-#       - ./bin/deploy.sh elasticsearcher-acceptance:
+#       - ./bin/deploy.sh elasticsearchr-acceptance:
 #           timeout: 360
 
 deployment:
   production:
     branch: master
     commands:
-      - ./bin/deploy.sh elasticsearcher:
+      - ./bin/deploy.sh elasticsearchr:
           timeout: 360
