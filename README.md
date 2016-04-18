@@ -1,4 +1,4 @@
-# Elasticsearcher
+# Elasticsearchr
 
 Playtime app to learn about different ways to use Elasticsearch with the `elasticsearch-ruby`
 and `elasticsearch-rails` gems.

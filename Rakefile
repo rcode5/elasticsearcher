@@ -4,7 +4,7 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Elasticsearcher::Application.load_tasks
+Elasticsearchr::Application.load_tasks
 
 # Spec is the default rake target.
 task(:default).clear
