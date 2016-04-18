@@ -13,7 +13,7 @@ feature "Root", elasticsearch: true, js: true  do
   end
 
   scenario "/ should include the application name in its title" do
-    expect(page).to have_title "Elasticsearcher"
+    expect(page).to have_title "Elasticsearchr"
   end
 
   scenario "I can see posts" do

@@ -1,4 +1,4 @@
-Elasticsearcher::Application.routes.draw do
+Elasticsearchr::Application.routes.draw do
 
   resources :authors do
     collection do
