@@ -4,7 +4,7 @@ module Search
 
   class QueryRunner
 
-    AVAILABLE_TYPES = %w|standard snowball ngram|
+    AVAILABLE_TYPES = %w|standard snowball ngram proximity_scoring|
     DEFAULT_QUERY_TYPE = :standard
 
     attr_reader :type, :query
@@ -108,6 +108,44 @@ module Search
           }
         }
       end
+
+      def self.proximity_scoring(query)
+        fields_across_models = %w| _all title body name hometown |
+        {
+          query: {
+            bool: {
+              must: {
+                match: {
+                  title: {
+                    query: query,
+                  }
+                }
+              },
+              should: {
+                match_phrase: {
+                  title: {
+                    query: query,
+                    slop: 53,
+                  }
+                }
+              }
+            }
+          },
+          size: 100,
+          highlight: {
+            pre_tags: ["<strong>"],
+            post_tags: ["</strong>"],
+            fields: {
+              '_all' => {},
+              'title' => {},
+              'body' => {},
+              'hometown' => {},
+              'name' => {}
+            }
+          }
+        }
+      end
+
     end
   end
 end
